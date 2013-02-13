@@ -1,19 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Web;
 using System.Web.Mvc;
+using AssignifyIt.Code;
+using AssignifyIt.Managers;
+using AssignifyIt.Models;
 
 namespace AssignifyIt.Controllers
 {
     public class FeedController : Controller
     {
+
+        private readonly DailyTextManager _dailyTextManager;
+
+        public FeedController()
+        {
+            _dailyTextManager = new DailyTextManager();
+        }
         //
         // GET: /Feed/
 
         public ActionResult Index()
         {
-            return View();
+            var texts = new List<DailyText>();
+            var text = _dailyTextManager.GetTodaysText();
+            texts.Add(text);
+            
+            var postItems = texts
+                .Select(p => new SyndicationItem(p.DateLine, string.Concat(p.Header,p.Body), new Uri("http://assignit.apphb.com/Feed")));
+
+            var feed = new SyndicationFeed("Daily Text", "Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
+            {
+                //Copyright = blog.Copyright,
+                Language = "en-US"
+            };
+
+            return new FeedResult(new Rss20FeedFormatter(feed));
         }
 
     }
