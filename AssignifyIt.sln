@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignifyIt", "AssignifyIt\AssignifyIt.csproj", "{CD5191F6-9F31-47B8-BD26-279C1F520A4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignifyIt.Tests", "AssignifyIt.Tests\AssignifyIt.Tests.csproj", "{1009016D-54A5-4469-B49E-701E7A1A1C8D}"

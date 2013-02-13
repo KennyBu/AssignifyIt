@@ -10,7 +10,7 @@ namespace AssignifyIt.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to AssignifyIt!";
+            ViewBag.Message = "Welcome to AssignifyIt! This is a test";
 
             return View();
         }
