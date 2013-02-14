@@ -29,7 +29,7 @@ namespace AssignifyIt.Controllers
             texts.Add(text);
             
             var postItems = texts
-                .Select(p => new SyndicationItem(p.DateLine, string.Concat(p.Header,"<br/>",p.Body), new Uri("http://assignit.apphb.com/Feed")));
+                .Select(p => new SyndicationItem(p.DateLine, GetContent(string.Concat(p.Header, "<br/>", p.Body)), new Uri("http://assignit.apphb.com/Feed")));
 
             var feed = new SyndicationFeed("Daily Text", "Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
             {
@@ -38,6 +38,11 @@ namespace AssignifyIt.Controllers
             };
 
             return new FeedResult(new Rss20FeedFormatter(feed));
+        }
+
+        private string GetContent(string inContent)
+        {
+            return new TextSyndicationContent(inContent, TextSyndicationContentKind.Html).Text;
         }
 
     }
