@@ -29,7 +29,7 @@ namespace AssignifyIt.Controllers
             texts.Add(text);
             
             var postItems = texts
-                .Select(p => new SyndicationItem(p.DateLine, string.Concat(p.Header,"<p>",p.Body), new Uri("http://assignit.apphb.com/Feed")));
+                .Select(p => new SyndicationItem(p.DateLine, string.Concat(p.Header,"<br/>",p.Body), new Uri("http://assignit.apphb.com/Feed")));
 
             var feed = new SyndicationFeed("Daily Text", "Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
             {
