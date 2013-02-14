@@ -33,7 +33,7 @@ namespace AssignifyIt.Controllers
 
             var feed = new SyndicationFeed("Daily Text", "Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
             {
-                //Copyright = blog.Copyright,
+                Copyright = new TextSyndicationContent("copyright never"),
                 Language = "en-US"
             };
 
