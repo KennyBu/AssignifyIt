@@ -83,6 +83,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AboutViewModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DailyTextViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

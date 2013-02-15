@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssignifyIt.Models;
 
 namespace AssignifyIt.Controllers
 {
@@ -17,7 +19,10 @@ namespace AssignifyIt.Controllers
 
         public ActionResult About()
         {
-            return View();
+            var configValue = ConfigurationManager.AppSettings["kentest"];
+            var model = new AboutViewModel {Message = string.Format("The Value is: {0}", configValue)};
+            
+            return View(model);
         }
     }
 }
