@@ -41,5 +41,14 @@ namespace AssignifyIt.Controllers
                     Name = assignee.Name, Email = assignee.Email
                 }).ToList();
         }
+
+        public JsonResult GetAssignees()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
+            var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
+            var list = manager.GetAssignees();
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

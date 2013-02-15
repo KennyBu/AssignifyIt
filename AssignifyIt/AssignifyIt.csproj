@@ -51,6 +51,9 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.35\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.ServiceModel" />
@@ -77,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Code\FeedResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\DailyTextController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -85,6 +89,7 @@
     </Compile>
     <Compile Include="Models\AboutViewModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AssignmentViewModel.cs" />
     <Compile Include="Models\DailyTextViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -184,6 +189,9 @@
       <Project>{F4334B7A-CA3E-4AD1-BBA7-B090F1315023}</Project>
       <Name>AssignifyIt.Queries</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Assignment\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

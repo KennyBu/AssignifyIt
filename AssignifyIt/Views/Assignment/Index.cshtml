@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#ddAssignees").autocomplete({
+            source: '<%= Url.Action("GetAssignees", "Home") %>',
+            select: function(event, ui) {
+                $("#ddAssignees").val(ui.item.label);
+                return false;
+            }
+        });
+    });
+</script>
+
+<div class="ui-widget"><input type="text" name="ddAssignees" id="ddAssignees" /></div>
