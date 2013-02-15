@@ -4,14 +4,8 @@
 
 <h2>Index</h2>
 
-
-
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#ddAssignees").autocomplete({
-            source: "/Home/GetAssignees"
-        });
-    });
+    $("#txtName").autocomplete({ source: "/Home/GetAssignees" });
 </script>
 
-<div class="ui-widget"><input type="text" name="ddAssignees" id="ddAssignees" /></div>
+<div class="ui-widget"><input type="text" name="txtName" id="txtName" /></div>
