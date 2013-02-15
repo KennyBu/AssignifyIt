@@ -9,11 +9,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#ddAssignees").autocomplete({
-            source: '<%= Url.Action("GetAssignees", "Home") %>',
-            select: function(event, ui) {
-                $("#ddAssignees").val(ui.item.label);
-                return false;
-            }
+            source: '<%= Url.Action("GetAssignees", "Home") %>'
         });
     });
 </script>
