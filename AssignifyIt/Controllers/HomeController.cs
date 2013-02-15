@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AssignifyIt.Managers;
 using AssignifyIt.Models;
+using AssignifyIt.Queries.Assignments;
 
 namespace AssignifyIt.Controllers
 {
@@ -20,9 +20,26 @@ namespace AssignifyIt.Controllers
         public ActionResult About()
         {
             var configValue = ConfigurationManager.AppSettings["kentest"];
-            var model = new AboutViewModel {Message = string.Format("The Value is: {0}", configValue)};
+            var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
+
+            var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
+            var list = manager.GetAssignees();
+
+            var model = new AboutViewModel
+                {
+                    Message = string.Format("The Value is: {0}", configValue),
+                    Assignees = MapAssigneesToViewModel(list)
+                };
             
             return View(model);
+        }
+
+        private List<AssigneeViewModel> MapAssigneesToViewModel(IEnumerable<Assignee> assignees)
+        {
+            return assignees.Select(assignee => new AssigneeViewModel
+                {
+                    Name = assignee.Name, Email = assignee.Email
+                }).ToList();
         }
     }
 }

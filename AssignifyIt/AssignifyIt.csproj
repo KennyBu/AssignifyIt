@@ -180,6 +180,10 @@
       <Project>{200da55d-0527-464b-b1db-6684d08374c4}</Project>
       <Name>AssignifyIt.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AssignifyIt.Queries\AssignifyIt.Queries.csproj">
+      <Project>{F4334B7A-CA3E-4AD1-BBA7-B090F1315023}</Project>
+      <Name>AssignifyIt.Queries</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
