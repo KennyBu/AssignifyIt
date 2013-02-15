@@ -9,7 +9,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#ddAssignees").autocomplete({
-            source: '<%= Url.Action("GetAssignees", "Home") %>'
+            source: "/Home/GetAssignees"
         });
     });
 </script>
