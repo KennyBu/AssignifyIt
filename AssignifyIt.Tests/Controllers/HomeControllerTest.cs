@@ -27,6 +27,7 @@ namespace AssignifyIt.Tests.Controllers
         }
 
         [TestMethod]
+        [Ignore]
         public void About()
         {
             // Arrange
