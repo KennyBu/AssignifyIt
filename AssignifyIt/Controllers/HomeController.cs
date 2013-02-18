@@ -17,7 +17,7 @@ namespace AssignifyIt.Controllers
             return View();
         }
 
-        public ActionResult About(string search="")
+        public ActionResult About(string search)
         {
             var configValue = ConfigurationManager.AppSettings["kentest"];
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;

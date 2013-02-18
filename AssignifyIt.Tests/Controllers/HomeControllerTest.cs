@@ -26,6 +26,7 @@ namespace AssignifyIt.Tests.Controllers
             Assert.AreEqual("Welcome to ASP.NET MVC!", result.ViewBag.Message);
         }
 
+        /*
         [TestMethod]
         [Ignore]
         public void About()
@@ -39,5 +40,6 @@ namespace AssignifyIt.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+         */
     }
 }
