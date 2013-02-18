@@ -37,10 +37,8 @@ namespace AssignifyIt.Controllers
 
         private List<AssigneeViewModel> MapAssigneesToViewModel(IEnumerable<Assignee> assignees)
         {
-            return assignees.Select(assignee => new AssigneeViewModel
-                {
-                    Name = assignee.Name, Email = assignee.Email
-                }).ToList();
+            return assignees != null ? assignees.Select(assignee => new AssigneeViewModel{Name = assignee.Name, Email = assignee.Email}).ToList() 
+                : new List<AssigneeViewModel>();
         }
 
         public JsonResult GetAssignees(string searchText)
