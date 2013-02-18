@@ -26,7 +26,8 @@ namespace AssignifyIt.Queries.Assignments
 
         public IEnumerable<Assignee> GetAssignees(string search)
         {
-            return _db.Query<Assignee>("SELECT * FROM Assignee WHERE Name Like {0}","%search%");
+            return _db.Query<Assignee>("SELECT * FROM Assignee");
+            //return _db.Query<Assignee>("SELECT * FROM Assignee WHERE Name Like {0}","%search%");
         }
     }
 }
