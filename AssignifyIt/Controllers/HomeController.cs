@@ -24,7 +24,9 @@ namespace AssignifyIt.Controllers
 
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
 
-            var list = string.IsNullOrWhiteSpace(search) ? manager.GetAssignees() : manager.GetAssignees(search);
+            var list = string.IsNullOrWhiteSpace(search)
+                           ? manager.GetAssignees().ToList()
+                           : manager.GetAssignees(search);
 
             var model = new AboutViewModel
                 {
@@ -37,8 +39,10 @@ namespace AssignifyIt.Controllers
 
         private List<AssigneeViewModel> MapAssigneesToViewModel(IEnumerable<Assignee> assignees)
         {
-            return assignees != null ? assignees.Select(assignee => new AssigneeViewModel{Name = assignee.Name, Email = assignee.Email}).ToList() 
+            var list = assignees != null ? assignees.Select(assignee => new AssigneeViewModel { Name = assignee.Name, Email = assignee.Email }).ToList() 
                 : new List<AssigneeViewModel>();
+
+            return list;
         }
 
         public JsonResult GetAssignees(string searchText)
