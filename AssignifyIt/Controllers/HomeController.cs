@@ -17,13 +17,14 @@ namespace AssignifyIt.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult About(string search="")
         {
             var configValue = ConfigurationManager.AppSettings["kentest"];
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
 
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
-            var list = manager.GetAssignees();
+
+            var list = string.IsNullOrWhiteSpace(search) ? manager.GetAssignees() : manager.GetAssignees(search);
 
             var model = new AboutViewModel
                 {
