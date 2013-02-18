@@ -17,15 +17,27 @@
 *@
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         $("#txtName").autocomplete({
-            source: "/Home/GetAssignees",
-            minLength: 1,
-            
-            
+            source: function(request, response) {
+                $.ajax({
+                    url: "/Home/GetAssignees",
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        response($.map(data, function(item) {
+                            return { label: item.Name, value: item.Name, id: item.ID }
+                        }))
+                    }
+                })
+            }
         });
     });
-</script>
+                        
+                
+                        
+                        
+            </script>
 
 
 
