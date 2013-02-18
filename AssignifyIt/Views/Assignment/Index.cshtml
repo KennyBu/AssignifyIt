@@ -31,6 +31,10 @@
                         }))
                     }
                 })
+            },
+            select: function (event, ui) {
+                alert(ui.item ? ("You Picked '" + ui.item.label + "' with an Id of " + ui.item.id)
+                    : "Nothing selected, input was " + this.value);
             }
         });
     });
@@ -47,3 +51,5 @@
     <input id="txtName" name="txtName" type="text" />
     <input type="submit" value="Go" />
 }
+
+
