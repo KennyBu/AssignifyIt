@@ -42,11 +42,11 @@ namespace AssignifyIt.Controllers
                 }).ToList();
         }
 
-        public JsonResult GetAssignees()
+        public JsonResult GetAssignees(string searchText)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
-            var list = manager.GetAssignees();
+            var list = manager.GetAssignees(searchText);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

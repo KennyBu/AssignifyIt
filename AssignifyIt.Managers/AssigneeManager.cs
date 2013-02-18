@@ -7,6 +7,7 @@ namespace AssignifyIt.Managers
     public interface IAssigneeManager
     {
         IEnumerable<Assignee> GetAssignees();
+        IEnumerable<Assignee> GetAssignees(string search);
     }
 
     public class AssigneeManager : IAssigneeManager
@@ -21,6 +22,11 @@ namespace AssignifyIt.Managers
         public IEnumerable<Assignee> GetAssignees()
         {
             return _assignmentManagerQuery.GetAssignees();
+        }
+
+        public IEnumerable<Assignee> GetAssignees(string search)
+        {
+            return _assignmentManagerQuery.GetAssignees(search);
         }
     }
 }
