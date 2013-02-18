@@ -4,8 +4,37 @@
 
 <h2>Index</h2>
 
+@*
 <script type="text/javascript">
-    $("#txtName").autocomplete({ source: "/Home/GetAssignees" });
+    $("#txtName").autocomplete(
+        { source: "/Home/GetAssignees" });
+</script>
+*@
+@*
+<div class="ui-widget">
+    <input type="text" name="txtName" id="txtName" />
+</div>
+*@
+
+<script type="text/javascript">
+    $(function () {
+        $("#txtName").autocomplete({
+            source: "/Home/GetAssignees",
+            minLength: 3,
+            select: function (event, ui) {
+                if (ui.item) {
+                    $("#txtName").val(ui.item.value);
+                    $("form").submit();
+                }
+            }
+        });
+    });
 </script>
 
-<div class="ui-widget"><input type="text" name="txtName" id="txtName" /></div>
+
+
+@using (Html.BeginForm("SubmitAssignment","Assignment"))
+{
+    <input id="txtName" name="txtName" type="text" />
+    <input type="submit" value="Go" />
+}

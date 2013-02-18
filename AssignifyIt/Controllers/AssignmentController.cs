@@ -16,5 +16,13 @@ namespace AssignifyIt.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult SubmitAssignment(string txtName)
+        {
+            var assignmentName = txtName;
+
+            return Redirect("/Home");
+        }
+
     }
 }
