@@ -22,16 +22,18 @@ namespace AssignifyIt.Controllers
             var configValue = ConfigurationManager.AppSettings["kentest"];
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
 
+            /*
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
 
             var list = string.IsNullOrWhiteSpace(search)
                            ? manager.GetAssignees().ToList()
                            : manager.GetAssignees(search);
-
+            */
             var model = new AboutViewModel
                 {
                     Message = string.Format("The Value is: {0}", configValue),
-                    Assignees = MapAssigneesToViewModel(list)
+                    Assignees = new List<AssigneeViewModel>()
+                    //Assignees = MapAssigneesToViewModel(list)
                 };
             
             return View(model);
