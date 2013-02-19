@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Web;
@@ -7,26 +8,31 @@ using System.Web.Mvc;
 using AssignifyIt.Code;
 using AssignifyIt.Managers;
 using AssignifyIt.Models;
+using AssignifyIt.Queries.DailyTexts;
 
 namespace AssignifyIt.Controllers
 {
     public class FeedController : Controller
     {
-
+        private readonly DailyTextManagerQuery _query;
         private readonly DailyTextManager _dailyTextManager;
 
         public FeedController()
         {
-            _dailyTextManager = new DailyTextManager();
+            var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
+            _query = new DailyTextManagerQuery(connectionString);
+            _dailyTextManager = new DailyTextManager(_query);
         }
         //
         // GET: /Feed/
 
         public ActionResult Index()
         {
-            var texts = new List<DailyText>();
-            var text = _dailyTextManager.GetTodaysText();
-            texts.Add(text);
+            //var texts = new List<DailyText>();
+            //var text = _dailyTextManager.GetTodaysText();
+            //texts.Add(text);
+
+            var texts = _dailyTextManager.GetDailyTextList();
             
             var postItems = texts
                 .Select(p => new SyndicationItem(p.DateLine, GetContent(string.Concat(p.Header, "<br/>", p.Body)), new Uri("http://assignit.apphb.com/Feed")));

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assignments\AssignmentManagerQuery.cs" />
+    <Compile Include="DailyTexts\DailyTextManagerQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
