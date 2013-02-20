@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using AssignifyIt.Models;
 using AssignifyIt.Queries.DailyTexts;
 using HtmlAgilityPack;
@@ -9,6 +10,7 @@ namespace AssignifyIt.Managers
     public interface IDailyTextManager
     {
         DailyText GetTodaysText();
+        DailyText GetText(Guid id);
         List<DailyText> GetDailyTextList(int maxItems = 10);
     }
     
@@ -23,11 +25,16 @@ namespace AssignifyIt.Managers
 
         public DailyText GetTodaysText()
         {
-            var dailyText = _dailyTextManagerQuery.GetDailyText(DateTime.UtcNow);
+
+            var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            var easternTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, easternZone);
+
+            var dailyText = _dailyTextManagerQuery.GetDailyText(easternTime);
             if (dailyText != null)
                 return dailyText;
             
-            const string url = "http://wol.jw.org/en/wol/dt/r1/lp-e";
+            var url = string.Format("http://wol.jw.org/en/wol/dt/r1/lp-e/{0}/{1}/{2}", easternTime.Year,easternTime.Month,easternTime.Day);
+        
 
             var web = new HtmlWeb();
             var doc = web.Load(url);
@@ -38,12 +45,17 @@ namespace AssignifyIt.Managers
                     DateLine = ParseNode(doc, "//p[@class='ss']"),
                     Header = ParseNode(doc, "//p[@class='sa']"),
                     Body = ParseNode(doc, "//p[@class='sb']"),
-                    DateEntered = DateTime.UtcNow
+                    DateEntered = easternTime
                 };
 
             _dailyTextManagerQuery.InsertDailyText(dailyText);
 
             return dailyText;
+        }
+
+        public DailyText GetText(Guid id)
+        {
+            return _dailyTextManagerQuery.GetDailyText(id);
         }
 
         public List<DailyText> GetDailyTextList(int maxItems = 10)

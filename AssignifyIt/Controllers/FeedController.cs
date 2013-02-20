@@ -28,18 +28,14 @@ namespace AssignifyIt.Controllers
 
         public ActionResult Index()
         {
-            //var texts = new List<DailyText>();
-            //var text = _dailyTextManager.GetTodaysText();
-            //texts.Add(text);
-
             var texts = _dailyTextManager.GetDailyTextList();
             
             var postItems = texts
-                .Select(p => new SyndicationItem(p.DateLine, GetContent(string.Concat(p.Header, "<br/>", p.Body)), new Uri("http://assignit.apphb.com/Feed")));
+                .Select(p => new SyndicationItem(p.DateLine, GetContent(string.Concat(p.Header, "<br/>", p.Body)), new Uri(string.Format("http://assignit.apphb.com/DailyText/Article/{0}",p.Id))));
 
-            var feed = new SyndicationFeed("Daily Text", "Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
+            var feed = new SyndicationFeed("Daily Text", "The Daily Text", new Uri("http://assignit.apphb.com/Feed"), postItems)
             {
-                Copyright = new TextSyndicationContent("copyright never"),
+                Copyright = new TextSyndicationContent("Copyright 2013"),
                 Language = "en-US"
             };
 

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using AssignifyIt.Managers;
 using AssignifyIt.Models;
@@ -33,6 +34,21 @@ namespace AssignifyIt.Controllers
             
             return View(viewModel);
         }
+
+        public ActionResult Article(Guid id)
+        {
+            var model = _dailyTextManager.GetText(id);
+            var viewModel = new DailyTextViewModel
+            {
+                DateLine = model.DateLine,
+                Header = model.Header,
+                Body = model.Body
+            };
+
+            return View("Index",viewModel);
+        }
+
+
 
     }
 }
