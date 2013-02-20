@@ -25,12 +25,12 @@ namespace AssignifyIt.Queries.DailyTexts
         
         public DailyText GetDailyText(DateTime date)
         {
-            return _db.FirstOrDefault<DailyText>("SELECT * FROM dbo.DailyText WHERE CONVERT(DATE,GETDATE()) = CONVERT(DATE,{0})",date);
+            return _db.Query<DailyText>(string.Format("SELECT * FROM dbo.DailyText WHERE CONVERT(DATE,DateEntered) = CONVERT(DATE,{0})","'"+ date + "'")).FirstOrDefault();
         }
 
         public List<DailyText> GetDailyTextList(int maxItems)
         {
-            return _db.Query<DailyText>("SELECT TOP {0} * FROM dbo.DailyText ORDER BY DateAdded DESC", maxItems).ToList();
+            return _db.Query<DailyText>(string.Format("SELECT TOP {0} * FROM dbo.DailyText ORDER BY DateEntered DESC", maxItems)).ToList();
         }
 
         public void InsertDailyText(DailyText dailyText)
