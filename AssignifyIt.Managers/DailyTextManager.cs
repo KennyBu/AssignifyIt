@@ -23,7 +23,7 @@ namespace AssignifyIt.Managers
 
         public DailyText GetTodaysText()
         {
-            var dailyText = _dailyTextManagerQuery.GetDailyText(DateTime.Now);
+            var dailyText = _dailyTextManagerQuery.GetDailyText(DateTime.UtcNow);
             if (dailyText != null)
                 return dailyText;
             
@@ -38,7 +38,7 @@ namespace AssignifyIt.Managers
                     DateLine = ParseNode(doc, "//p[@class='ss']"),
                     Header = ParseNode(doc, "//p[@class='sa']"),
                     Body = ParseNode(doc, "//p[@class='sb']"),
-                    DateEntered = DateTime.Now
+                    DateEntered = DateTime.UtcNow
                 };
 
             _dailyTextManagerQuery.InsertDailyText(dailyText);
