@@ -1,10 +1,10 @@
 body {
-    min-width:300px;
+    min-width:500px;
 }
 
 h1
 {
-    color: blue;
+    color: black;
 }
 
 #main
@@ -12,4 +12,35 @@ h1
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+#text-date
+{
+    font-family: 'Helvetica Neue',Helvetica,'Droid Sans',Arial,"Arial Unicode","Arial Unicode MS",sans-serif;
+    font-size: 22px;
+    font-weight: 200;
+    color: 	black;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
+}
+
+#text-header
+{
+    font-family: 'Helvetica Neue',Helvetica,'Droid Sans',Arial,"Arial Unicode","Arial Unicode MS",sans-serif;
+    font-size: 14.667px;
+    color: #535353;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
+}
+
+#text-body
+{
+    font-family: 'Helvetica Neue',Helvetica,'Droid Sans',Arial,"Arial Unicode","Arial Unicode MS",sans-serif;
+    font-size: 14.667px;
+    color:	#535353;
+    margin-top: 0;
+    padding-top: 0;
+    text-align: center;
 }
