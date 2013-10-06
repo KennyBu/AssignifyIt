@@ -48,7 +48,18 @@ namespace AssignifyIt.Controllers
             return View("Index",viewModel);
         }
 
+       [HttpGet]
+        public JsonResult Json()
+        {
+            var model = _dailyTextManager.GetTodaysText();
+            var viewModel = new DailyTextViewModel
+            {
+                DateLine = model.DateLine,
+                Header = model.Header,
+                Body = model.Body
+            };
 
-
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
     }
 }

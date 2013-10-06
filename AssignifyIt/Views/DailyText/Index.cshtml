@@ -3,6 +3,6 @@
     ViewBag.Title = "Daily Text";
 }
 
-<h2>@Model.DateLine</h2>
-<h2>@Model.Header</h2>
-<h2>@Model.Body</h2>
+<h2>@Html.Raw(@Model.DateLine)</h2>
+<h2>@Html.Raw(@Model.Header)</h2>
+<h2>@Html.Raw(Model.Body)</h2>

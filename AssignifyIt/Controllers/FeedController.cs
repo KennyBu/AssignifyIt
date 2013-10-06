@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.ServiceModel.Syndication;
-using System.Web;
 using System.Web.Mvc;
 using AssignifyIt.Code;
 using AssignifyIt.Managers;
-using AssignifyIt.Models;
 using AssignifyIt.Queries.DailyTexts;
 
 namespace AssignifyIt.Controllers
