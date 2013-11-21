@@ -6,7 +6,7 @@ using PetaPoco;
 
 namespace AssignifyIt.Queries.DailyTexts
 {
-    public interface IDailyTextManagerQuery
+    public interface IDailyTextManagerQuery : IDisposable
     {
         DailyText GetDailyText(DateTime date);
         DailyText GetDailyText(Guid id);
@@ -49,5 +49,9 @@ namespace AssignifyIt.Queries.DailyTexts
             _db.Insert(dailyText);
         }
 
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
     }
 }
