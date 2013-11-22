@@ -51,7 +51,9 @@ namespace AssignifyIt.Controllers
         public JsonResult GetAssignees(string searchText)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
-            var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
+            var elasticSearchUrl = ConfigurationManager.AppSettings["SEARCHBOX_URL"];
+
+            var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString), new ElasticSearchManager(elasticSearchUrl));
             var list = manager.GetAssignees(searchText);
 
             return Json(list, JsonRequestBehavior.AllowGet);

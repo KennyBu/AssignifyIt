@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AssignifyIt.Models;
 using AssignifyIt.Queries.Assignments;
 
@@ -8,15 +9,19 @@ namespace AssignifyIt.Managers
     {
         IEnumerable<Assignee> GetAssignees();
         IEnumerable<Assignee> GetAssignees(string search);
+        void IndexAssignees();
     }
 
     public class AssigneeManager : IAssigneeManager
     {
         private readonly IAssignmentManagerQuery _assignmentManagerQuery;
+        private readonly IElasticSearchManager _elasticSearchManager;
 
-        public AssigneeManager(IAssignmentManagerQuery assignmentManagerQuery)
+        public AssigneeManager(IAssignmentManagerQuery assignmentManagerQuery, 
+            IElasticSearchManager elasticSearchManager)
         {
             _assignmentManagerQuery = assignmentManagerQuery;
+            _elasticSearchManager = elasticSearchManager;
         }
 
         public IEnumerable<Assignee> GetAssignees()
@@ -26,7 +31,15 @@ namespace AssignifyIt.Managers
 
         public IEnumerable<Assignee> GetAssignees(string search)
         {
-            return _assignmentManagerQuery.GetAssignees(search);
+            //return _assignmentManagerQuery.GetAssignees(search);
+            var assignees = _elasticSearchManager.Search(search);
+            return assignees;
+        }
+
+        public void IndexAssignees()
+        {
+            var assignees = _assignmentManagerQuery.GetAssignees();
+            _elasticSearchManager.CreateIndex(assignees.ToList());
         }
     }
 }
