@@ -30,7 +30,10 @@ namespace AssignifyIt.Managers
         {
             _elasticClient.CreateIndex("assigneeindex", new IndexSettings());
 
-            _elasticClient.Index(assignees);    
+            foreach (var assignee in assignees)
+            {
+                _elasticClient.Index(assignee, "assigneeindex", "Name", assignee.Id.ToString());
+            }
         }
 
         public List<Assignee> Search(string search)
