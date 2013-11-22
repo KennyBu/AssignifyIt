@@ -54,6 +54,8 @@ namespace AssignifyIt.Controllers
             var elasticSearchUrl = ConfigurationManager.AppSettings["SEARCHBOX_URL"];
 
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString), new ElasticSearchManager(elasticSearchUrl));
+            manager.IndexAssignees();
+            
             var list = manager.GetAssignees(searchText);
 
             return Json(list, JsonRequestBehavior.AllowGet);
