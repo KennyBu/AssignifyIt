@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AssignifyIt.Models;
 using AssignifyIt.Queries.Assignments;
@@ -10,6 +11,7 @@ namespace AssignifyIt.Managers
         IEnumerable<Assignee> GetAssignees();
         IEnumerable<Assignee> GetAssignees(string search);
         void IndexAssignees();
+        void Reindex();
     }
 
     public class AssigneeManager : IAssigneeManager
@@ -38,8 +40,14 @@ namespace AssignifyIt.Managers
 
         public void IndexAssignees()
         {
-            var assignees = _assignmentManagerQuery.GetAssignees();
-            _elasticSearchManager.CreateIndex(assignees.ToList());
+            var assignees = _assignmentManagerQuery.GetAssignees().ToList();
+            _elasticSearchManager.CreateIndex(assignees);
+        }
+
+        public void Reindex()
+        {
+            var assignees = _assignmentManagerQuery.GetAssignees().ToList();
+            _elasticSearchManager.Reindex(assignees);
         }
     }
 }

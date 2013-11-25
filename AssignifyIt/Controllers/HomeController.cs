@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,6 +10,17 @@ namespace AssignifyIt.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAssigneeManager _assigneeManager;
+
+        public HomeController()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
+            var elasticSearchUrl = ConfigurationManager.AppSettings["SEARCHBOX_URL"];
+
+            _assigneeManager = new AssigneeManager(new AssignmentManagerQuery(connectionString), new ElasticSearchManager(elasticSearchUrl));
+            _assigneeManager.IndexAssignees();
+        }
+        
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to AssignifyIt! This is a test";
@@ -22,6 +32,8 @@ namespace AssignifyIt.Controllers
         {
             var configValue = ConfigurationManager.AppSettings["kentest"];
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
+
+            _assigneeManager.Reindex();
 
             /*
             var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString));
@@ -50,16 +62,9 @@ namespace AssignifyIt.Controllers
 
         public JsonResult GetAssignees(string searchText)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
-            var elasticSearchUrl = ConfigurationManager.AppSettings["SEARCHBOX_URL"];
-
-            var manager = new AssigneeManager(new AssignmentManagerQuery(connectionString), new ElasticSearchManager(elasticSearchUrl));
-            manager.IndexAssignees();
-            
-            var list = manager.GetAssignees(searchText);
+            var list = _assigneeManager.GetAssignees(searchText);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-       
     }
 }

@@ -9,11 +9,14 @@ namespace AssignifyIt.Managers
     public interface IElasticSearchManager
     {
         void CreateIndex(List<Assignee> assignees);
+        void Reindex(List<Assignee> assignees);
         List<Assignee> Search(string search);
     }
     
     public class ElasticSearchManager : IElasticSearchManager
     {
+        private const string IndexKey = "assigneeindex";
+        
         private readonly ElasticClient _elasticClient;
         
         public ElasticSearchManager(string uri)
@@ -21,25 +24,39 @@ namespace AssignifyIt.Managers
             var uriString = uri;
             var searchBoxUri = new Uri(uriString);
             var elasticSettings = new ConnectionSettings(searchBoxUri)
-                .SetDefaultIndex("assigneeindex");
+                .SetDefaultIndex(IndexKey);
 
             _elasticClient = new ElasticClient(elasticSettings);
         }
 
         public void CreateIndex(List<Assignee> assignees)
         {
-            _elasticClient.CreateIndex("assigneeindex", new IndexSettings());
-
-            foreach (var assignee in assignees)
+            // delete index if exists at startup
+            if (!_elasticClient.IndexExists(IndexKey).Exists)
             {
-                _elasticClient.Index(assignee, "assigneeindex", "Name", assignee.Id.ToString());
+                _elasticClient.DeleteIndex(IndexKey);
+                _elasticClient.CreateIndex(IndexKey, new IndexSettings());
+                _elasticClient.IndexMany<Assignee>(assignees);
             }
+        }
+
+        public void Reindex(List<Assignee> assignees)
+        {
+            // delete index if exists at startup
+            if (!_elasticClient.IndexExists(IndexKey).Exists)
+            {
+                _elasticClient.DeleteIndex(IndexKey);
+            }
+
+            _elasticClient.CreateIndex(IndexKey, new IndexSettings());
+            _elasticClient.IndexMany<Assignee>(assignees);
         }
 
         public List<Assignee> Search(string search)
         {
-            var result = _elasticClient.Search<Assignee>(body => body.Query(query =>
-            query.QueryString(qs => qs.Query(search))));
+            var result = _elasticClient.Search<Assignee>(s => s
+            .Query(q => q.Prefix(f => f.Name, search))
+            );
 
             return result.Documents.ToList();
         }

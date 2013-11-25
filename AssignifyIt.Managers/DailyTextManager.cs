@@ -18,12 +18,13 @@ namespace AssignifyIt.Managers
     {
         private readonly IDailyTextManagerQuery _dailyTextManagerQuery;
         private readonly IRedisManager _redisManager;
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger;
 
         public DailyTextManager(IDailyTextManagerQuery dailyTextManagerQuery, IRedisManager redisManager)
         {
             _dailyTextManagerQuery = dailyTextManagerQuery;
             _redisManager = redisManager;
+            _logger = LogManager.GetCurrentClassLogger();
         }
 
         public DailyText GetTodaysText()
@@ -36,7 +37,7 @@ namespace AssignifyIt.Managers
 
             if (dailyText != null)
             {
-                Logger.Info(string.Format("Daily Text Found in Redis with date: {0}", easternTime));
+                _logger.Info(string.Format("Daily Text Found in Redis with date: {0}", easternTime));
                 return dailyText;
             }
             
@@ -44,7 +45,7 @@ namespace AssignifyIt.Managers
             dailyText = _dailyTextManagerQuery.GetDailyText(easternTime);
             if (dailyText != null)
             {
-                Logger.Info(string.Format("Daily Text Found in SQL Server with date: {0}", easternTime));
+                _logger.Info(string.Format("Daily Text Found in SQL Server with date: {0}", easternTime));
                 _redisManager.InsertDailyText(dailyText);
                 return dailyText;
             }
@@ -63,7 +64,7 @@ namespace AssignifyIt.Managers
                     DateEntered = easternTime
                 };
 
-            Logger.Info(string.Format("Daily Text retrieved from WOL with date: {0}", easternTime));
+            _logger.Info(string.Format("Daily Text retrieved from WOL with date: {0}", easternTime));
             //Put the text into the cache & SQL Server
             _redisManager.InsertDailyText(dailyText);
             _dailyTextManagerQuery.InsertDailyText(dailyText);
