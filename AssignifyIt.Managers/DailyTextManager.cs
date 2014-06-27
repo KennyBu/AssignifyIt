@@ -17,13 +17,11 @@ namespace AssignifyIt.Managers
     public class DailyTextManager : IDailyTextManager, IDisposable
     {
         private readonly IDailyTextManagerQuery _dailyTextManagerQuery;
-        private readonly IRedisManager _redisManager;
         private readonly Logger _logger;
 
-        public DailyTextManager(IDailyTextManagerQuery dailyTextManagerQuery, IRedisManager redisManager)
+        public DailyTextManager(IDailyTextManagerQuery dailyTextManagerQuery)
         {
             _dailyTextManagerQuery = dailyTextManagerQuery;
-            _redisManager = redisManager;
             _logger = LogManager.GetCurrentClassLogger();
         }
 
@@ -31,22 +29,13 @@ namespace AssignifyIt.Managers
         {
             var easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             var easternTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, easternZone);
-
-            //First Check Redis Cache
-            var dailyText = _redisManager.GetDailyText(easternTime);
-
-            if (dailyText != null)
-            {
-                _logger.Info(string.Format("Daily Text Found in Redis with date: {0}", easternTime));
-                return dailyText;
-            }
             
             //Next Check SQL Server
-            dailyText = _dailyTextManagerQuery.GetDailyText(easternTime);
+            var dailyText = _dailyTextManagerQuery.GetDailyText(easternTime);
             if (dailyText != null)
             {
                 _logger.Info(string.Format("Daily Text Found in SQL Server with date: {0}", easternTime));
-                _redisManager.InsertDailyText(dailyText);
+
                 return dailyText;
             }
             
@@ -65,8 +54,9 @@ namespace AssignifyIt.Managers
                 };
 
             _logger.Info(string.Format("Daily Text retrieved from WOL with date: {0}", easternTime));
-            //Put the text into the cache & SQL Server
-            _redisManager.InsertDailyText(dailyText);
+            
+            //Put the text into SQL Server
+            
             _dailyTextManagerQuery.InsertDailyText(dailyText);
 
             return dailyText;
@@ -79,8 +69,6 @@ namespace AssignifyIt.Managers
 
         public List<DailyText> GetDailyTextList(int maxItems = 10)
         {
-            var dailyText = GetTodaysText();
-
             return _dailyTextManagerQuery.GetDailyTextList(maxItems);
         }
 
@@ -92,7 +80,6 @@ namespace AssignifyIt.Managers
         public void Dispose()
         {
             _dailyTextManagerQuery.Dispose();
-            _redisManager.Dispose();
         }
     }
 }

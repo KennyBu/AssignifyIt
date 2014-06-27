@@ -18,9 +18,7 @@ namespace AssignifyIt.Controllers
         {
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
             _query = new DailyTextManagerQuery(connectionString);
-            var redisUrl = ConfigurationManager.AppSettings["REDISCLOUD_URL"];
-            var redisManager = new RedisManager(redisUrl);
-            _dailyTextManager = new DailyTextManager(_query, redisManager);
+            _dailyTextManager = new DailyTextManager(_query);
         }
         //
         // GET: /Feed/

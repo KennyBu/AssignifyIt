@@ -7,11 +7,3 @@
 <p>
     @Model.Message
 </p>
-<br />
-<ul>
-    @foreach (var a in @Model.Assignees)
-    {
-        <li>@string.Format("{0} {1}", a.Name, a.Email) </li>
-    }
-</ul>
-

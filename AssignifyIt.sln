@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignifyIt", "AssignifyIt\AssignifyIt.csproj", "{CD5191F6-9F31-47B8-BD26-279C1F520A4E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignifyIt.Tests", "AssignifyIt.Tests\AssignifyIt.Tests.csproj", "{1009016D-54A5-4469-B49E-701E7A1A1C8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignifyIt.Managers", "AssignifyIt.Managers\AssignifyIt.Managers.csproj", "{AC439E7A-9E6F-4FCA-BECC-91C9D6B59D6F}"
 EndProject
@@ -23,10 +21,6 @@ Global
 		{CD5191F6-9F31-47B8-BD26-279C1F520A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5191F6-9F31-47B8-BD26-279C1F520A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5191F6-9F31-47B8-BD26-279C1F520A4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1009016D-54A5-4469-B49E-701E7A1A1C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1009016D-54A5-4469-B49E-701E7A1A1C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1009016D-54A5-4469-B49E-701E7A1A1C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1009016D-54A5-4469-B49E-701E7A1A1C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC439E7A-9E6F-4FCA-BECC-91C9D6B59D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC439E7A-9E6F-4FCA-BECC-91C9D6B59D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC439E7A-9E6F-4FCA-BECC-91C9D6B59D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
