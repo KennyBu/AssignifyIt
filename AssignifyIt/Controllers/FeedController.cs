@@ -25,6 +25,7 @@ namespace AssignifyIt.Controllers
 
         public ActionResult Index()
         {
+            var getTodaysText = _dailyTextManager.GetTodaysText();
             var texts = _dailyTextManager.GetDailyTextList();
             
             var postItems = texts
