@@ -103,11 +103,14 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\kb3.png" />
+    <Content Include="Content\img\portfolio\FRGX.png" />
     <Content Include="Content\img\portfolio\github1.jpg" />
     <Content Include="Content\img\portfolio\github2.jpg" />
     <Content Include="Content\img\portfolio\github3.jpg" />
     <Content Include="Content\img\portfolio\github4.jpg" />
     <Content Include="Content\img\portfolio\github5.jpg" />
+    <Content Include="Content\img\portfolio\Pcom.png" />
+    <Content Include="Content\img\portfolio\Pcom2.png" />
     <Content Include="Content\img\portfolio\so.jpg" />
     <Content Include="Content\img\portfolio\treehouse.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
