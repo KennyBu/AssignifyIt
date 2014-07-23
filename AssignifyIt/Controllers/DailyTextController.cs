@@ -9,14 +9,16 @@ namespace AssignifyIt.Controllers
 {
     public class DailyTextController : Controller
     {
-        private readonly DailyTextManagerQuery _query;
         private readonly DailyTextManager _dailyTextManager;
-        
+
         public DailyTextController()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["AssignifyItDatabase"].ConnectionString;
-            _query = new DailyTextManagerQuery(connectionString);
-            _dailyTextManager = new DailyTextManager(_query);
+            var redisUrl = ConfigurationManager.AppSettings["REDISCLOUD_URL"];
+            var redisManager = new RedisManager(redisUrl);
+            var query = new DailyTextManagerQuery(connectionString);
+
+            _dailyTextManager = new DailyTextManager(query, redisManager);
         }
         
         //

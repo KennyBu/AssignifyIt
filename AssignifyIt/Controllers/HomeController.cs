@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using System.Configuration;
 using System.Web.Mvc;
-using AssignifyIt.Managers;
 using AssignifyIt.Models;
-using AssignifyIt.Queries.Assignments;
 
 namespace AssignifyIt.Controllers
 {
