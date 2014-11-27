@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssignifyIt.Managers;
+using AssignifyIt.Queries.Assignments;
 
 namespace AssignifyIt.Controllers
 {
@@ -23,6 +26,5 @@ namespace AssignifyIt.Controllers
 
             return Redirect("/Home");
         }
-
     }
 }

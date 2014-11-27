@@ -1,6 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using AssignifyIt.Models;
 
 namespace AssignifyIt.Controllers
 {
@@ -8,21 +10,21 @@ namespace AssignifyIt.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to AssignifyIt! This is a test";
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult About(string search)
+        public ActionResult Contact()
         {
-            var configValue = ConfigurationManager.AppSettings["kentest"];
-            
-            var model = new AboutViewModel
-                {
-                    Message = string.Format("The Value is: {0}", configValue)
-                };
-            
-            return View(model);
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }

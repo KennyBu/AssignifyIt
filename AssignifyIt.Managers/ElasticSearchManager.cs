@@ -31,25 +31,12 @@ namespace AssignifyIt.Managers
 
         public void CreateIndex(List<Assignee> assignees)
         {
-            // delete index if exists at startup
-            if (!_elasticClient.IndexExists(IndexKey).Exists)
-            {
-                _elasticClient.DeleteIndex(IndexKey);
-                _elasticClient.CreateIndex(IndexKey, new IndexSettings());
-                _elasticClient.IndexMany<Assignee>(assignees);
-            }
+            
         }
 
         public void Reindex(List<Assignee> assignees)
         {
-            // delete index if exists at startup
-            if (!_elasticClient.IndexExists(IndexKey).Exists)
-            {
-                _elasticClient.DeleteIndex(IndexKey);
-            }
-
-            _elasticClient.CreateIndex(IndexKey, new IndexSettings());
-            _elasticClient.IndexMany<Assignee>(assignees);
+            
         }
 
         public List<Assignee> Search(string search)
