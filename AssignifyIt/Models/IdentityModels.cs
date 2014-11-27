@@ -21,7 +21,7 @@ namespace AssignifyIt.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("AssignifyItDatabase", throwIfV1Schema: false)
         {
         }
 

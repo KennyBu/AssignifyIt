@@ -9,11 +9,11 @@ using AssignifyIt.Queries.Assignments;
 
 namespace AssignifyIt.Controllers
 {
+    [Authorize]
     public class AssignmentController : Controller
     {
         //
         // GET: /Assignment/
-
         public ActionResult Index()
         {
             return View();
