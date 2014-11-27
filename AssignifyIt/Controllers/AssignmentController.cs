@@ -9,7 +9,7 @@ using AssignifyIt.Queries.Assignments;
 
 namespace AssignifyIt.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AssignmentController : Controller
     {
         //
