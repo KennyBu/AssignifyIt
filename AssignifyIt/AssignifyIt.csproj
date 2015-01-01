@@ -199,6 +199,8 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\kb3.png" />
+    <Content Include="Content\img\portfolio\adp.jpg" />
+    <Content Include="Content\img\portfolio\FragranceX.jpg" />
     <Content Include="Content\img\portfolio\FRGX.png" />
     <Content Include="Content\img\portfolio\github1.jpg" />
     <Content Include="Content\img\portfolio\github2.jpg" />
@@ -207,8 +209,14 @@
     <Content Include="Content\img\portfolio\github5.jpg" />
     <Content Include="Content\img\portfolio\Pcom.png" />
     <Content Include="Content\img\portfolio\Pcom2.png" />
+    <Content Include="Content\img\portfolio\Perfume.jpg" />
+    <Content Include="Content\img\portfolio\Purtians.jpg" />
+    <Content Include="Content\img\portfolio\reuters.jpg" />
     <Content Include="Content\img\portfolio\so.jpg" />
     <Content Include="Content\img\portfolio\treehouse.jpg" />
+    <Content Include="Content\img\portfolio\treehouse2.jpg" />
+    <Content Include="Content\img\portfolio\treehouse3.png" />
+    <Content Include="Content\img\portfolio\VitaminWorld.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
