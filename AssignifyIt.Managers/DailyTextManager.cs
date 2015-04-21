@@ -53,6 +53,7 @@ namespace AssignifyIt.Managers
             var web = new HtmlWeb();
             var doc = web.Load(url);
 
+            /*
             dailyText = new DailyText
                 {
                     Id = Guid.NewGuid(),
@@ -61,6 +62,16 @@ namespace AssignifyIt.Managers
                     Body = ParseNode(doc, "//p[@class='sb']"),
                     DateEntered = easternTime
                 };
+             */
+
+            dailyText = new DailyText
+            {
+                Id = Guid.NewGuid(),
+                DateLine = DateTime.Now.ToLongDateString(),
+                Header = ParseNode(doc, "//p[@class='themeScrp']"),
+                Body = ParseNode(doc, "//p[@class='sb']"),
+                DateEntered = easternTime
+            };
 
             _logger.Info(string.Format("Daily Text retrieved from WOL with date: {0}", easternTime));
 
